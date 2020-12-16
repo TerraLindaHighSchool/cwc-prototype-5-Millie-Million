@@ -6,6 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;
+    public bool isGameActive;
     public TextMeshProUGUI gameOverText;
     private float spawnRate = 1.0f;
     public TextMeshProUGUI scoreText;
@@ -14,15 +15,16 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnTarget());
+        isGameActive = true;
         score = 0;
+        StartCoroutine(SpawnTarget());
         scoreText.text = "Score: " + score;
         UpdateScore(0);
     }
 
     IEnumerator SpawnTarget()
     {
-        while (true)
+        while (isGameActive)
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targets.Count);
@@ -44,5 +46,6 @@ public class GameManager : MonoBehaviour
     public void gameOver()
     {
         gameOverText.gameObject.SetActive(true);
+        isGameActive = false;
     }
 }
