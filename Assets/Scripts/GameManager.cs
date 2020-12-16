@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
         score = 0;
         scoreText.text = "Score: " + score;
         UpdateScore(0);
-        gameOverText.gameObject.SetActive(true);
     }
 
     IEnumerator SpawnTarget()
@@ -40,5 +39,10 @@ public class GameManager : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    public void gameOver()
+    {
+        gameOverText.gameObject.SetActive(true);
     }
 }
